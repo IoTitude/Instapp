@@ -1,2 +1,2 @@
 # Instapp
-Mobile appliaction for intalling new metering units.
+Mobile application for installing new metering units.
