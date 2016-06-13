@@ -62,7 +62,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/logout',
     views: {
       'tab-logout': {
-        templateUrl: 'templates/tab-logout.html'
+        templateUrl: 'templates/tab-logout.html',
+        controller: 'LogoutCtrl'
       }
     }
   })

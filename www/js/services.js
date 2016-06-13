@@ -38,4 +38,15 @@ angular.module('starter.services', [])
         console.log(error);
       });
   };
+
+  // Logout
+  this.logout = function () {
+    return $http.post(baseUrl + "/logout", {}, {headers: {"X-BB-SESSION": token, "X-BAASBOX-APPCODE": appcode}})
+  }
+
+  // Set token
+  this.setToken = function (newToken) {
+    token = newToken
+  }
+
 });
