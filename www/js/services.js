@@ -55,13 +55,7 @@ angular.module('starter.services', [])
   var token = "";
 
   this.login = function(username, password) {
-    $http.post(baseUrl + "/login", {"username": username, "password": password, "appcode": appcode})
-      .then(function (body) {
-        token = body.data.data["X-BB-SESSION"];
-        console.log(token);
-      }, function(error) {
-        console.log(error);
-      });
+    return $http.post(baseUrl + "/login", {"username": username, "password": password, "appcode": appcode})
   };
 
   // Get all devices from database

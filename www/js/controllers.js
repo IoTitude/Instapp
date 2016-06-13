@@ -27,9 +27,17 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function ($scope, $http) {
+.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService) {
   $scope.data = {}
   $scope.login = function() {
-    console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password)
+    BaasBoxService.login($scope.data.username, $scope.data.password)
+      .then(function (body) {
+        token = body.data.data["X-BB-SESSION"];
+        $state.go('tab.dash')
+      }, function(error) {
+        $ionicPopup.alert({
+          title: "Login failed"
+        })
+      })
   }
 })
