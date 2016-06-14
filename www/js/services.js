@@ -24,4 +24,17 @@ angular.module('starter.services', [])
     token = newToken
   }
 
-});
+})
+
+.factory('Tasks', [function () {
+  var tasks = {}
+
+  return {
+    set: function (t) {
+      tasks = t
+    },
+    get: function () {
+      return tasks
+    }
+  }
+}])

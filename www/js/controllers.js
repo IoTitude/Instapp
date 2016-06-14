@@ -1,12 +1,20 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService) {
+.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService, Tasks) {
   $scope.data = {}
   $scope.login = function() {
     BaasBoxService.login($scope.data.username, $scope.data.password)
       .then(function (body) {
         token = body.data.data["X-BB-SESSION"];
         BaasBoxService.setToken(token)
+        BaasBoxService.getTasks()
+          .then(function (body) {
+            Tasks.set(body.data.data)
+          }, function (error) {
+            $ionicPopup.alert({
+              title: error.data.message
+            })
+          })
         $state.go('tab.tasks')
       }, function(error) {
         $ionicPopup.alert({
@@ -29,8 +37,8 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('TaskCtrl', ['$scope', '$ionicPopup', 'BaasBoxService', function ($scope, $ionicPopup, BaasBoxService) {
-  $scope.tasks = {}
+.controller('TaskCtrl', ['$scope', '$ionicPopup', 'Tasks', 'BaasBoxService', function ($scope, $ionicPopup, Tasks, BaasBoxService) {
+  $scope.tasks = Tasks.get()
 
   $scope.update = function () {
     BaasBoxService.getTasks()
