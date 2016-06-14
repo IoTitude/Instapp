@@ -51,3 +51,7 @@ angular.module('starter.controllers', [])
       })
   }
 }])
+
+.controller('TaskDetailCtrl', ['$scope', '$stateParams', 'Tasks', function ($scope, $stateParams, Tasks) {
+  $scope.task = Tasks.getTask($stateParams.taskName)
+}])

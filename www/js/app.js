@@ -54,7 +54,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     url: '/tasks/:taskName',
     views: {
       'tab-tasks': {
-        templateUrl: 'templates/task-detail.html'
+        templateUrl: 'templates/task-detail.html',
+        controller: 'TaskDetailCtrl'
       }
     }
   })
