@@ -50,6 +50,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.task-detail', {
+    url: '/tasks/:taskName',
+    views: {
+      'tab-tasks': {
+        templateUrl: 'templates/task-detail.html'
+      }
+    }
+  })
+
   .state('tab.qr', {
       url: '/qr',
       views: {

@@ -3,11 +3,11 @@
     <button ng-click="update()" class="button button-block button-positive">
       Get tasks
     </button>
-    <ul class="list">
-      <a class="item" ng-repeat="task in tasks">
+    <ion-list>
+      <ion-item ng-repeat="task in tasks" href="#/tab/tasks/{{task.name}}">
         {{task.name}}
         {{task.enabled}}
-      </a>
-    </ul>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
