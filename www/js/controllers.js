@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
         $state.go('tab.tasks')
       }, function(error) {
         $ionicPopup.alert({
-          title: "Login failed"
+          title: error.data.message
         })
       })
   }
@@ -28,3 +28,18 @@ angular.module('starter.controllers', [])
       })
   }
 })
+
+.controller('TaskCtrl', ['$scope', '$ionicPopup', 'BaasBoxService', function ($scope, $ionicPopup, BaasBoxService) {
+  $scope.tasks = {}
+
+  $scope.update = function () {
+    BaasBoxService.getTasks()
+      .then(function (body) {
+        $scope.tasks = body.data.data
+      }, function (error) {
+        $ionicPopup.alert({
+          title: error.data.message
+        })
+      })
+  }
+}])

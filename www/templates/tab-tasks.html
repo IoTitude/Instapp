@@ -1,5 +1,13 @@
 <ion-view view-title="Tasks">
   <ion-content class="padding">
-    asdasd
+    <button ng-click="update()" class="button button-block button-positive">
+      Get tasks
+    </button>
+    <ul class="list">
+      <a class="item" ng-repeat="task in tasks">
+        {{task.name}}
+        {{task.enabled}}
+      </a>
+    </ul>
   </ion-content>
 </ion-view>

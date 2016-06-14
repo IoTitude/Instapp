@@ -9,34 +9,9 @@ angular.module('starter.services', [])
     return $http.post(baseUrl + "/login", {"username": username, "password": password, "appcode": appcode})
   };
 
-  // Get all devices from database
-  this.getDevices = function() {
-    if (token.length > 0) {
-      $http.get(baseUrl + "/document/raspit", {headers: {"X-BB-SESSION": token}})
-        .then(function(body) {
-          console.log(body);
-        }, function(error) {
-          console.log(error);
-        });
-    }
-    else {
-      console.log("Not signed in.")
-    }
-  };
-
-  // Add new device to the database
-  this.addDevice = function(device) {
-    // Unchecked checkbox values are not passed forward from form. Add false.
-    if (!device.status) {
-      device.status = false;
-    }
-    console.log(device);
-    $http.post(baseUrl + "/plugin/new_device.script", device, {headers: {"X-BB-SESSION": token}})
-      .then(function(body) {
-        console.log(body);
-      }, function(error) {
-        console.log(error);
-      });
+  // Get all tasks from database
+  this.getTasks = function() {
+    return $http.get(baseUrl + "/document/tasks", {headers: {"X-BB-SESSION": token}})
   };
 
   // Logout
