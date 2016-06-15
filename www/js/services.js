@@ -1,6 +1,8 @@
 angular.module('starter.services', [])
 
+// Service for communicating with the BaasBox API
 .service('BaasBoxService', function($http) {
+  // TODO: Move server information to a configuration file. DO NOT publish that file on GitHub.
   var baseUrl = "http://192.168.142.37:9000";
   var appcode = "1234567890";
   var token = "";
@@ -32,6 +34,7 @@ angular.module('starter.services', [])
 
 })
 
+// Service for storing the task list
 .factory('Tasks', [function () {
   var tasks = {}
 

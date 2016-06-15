@@ -6,6 +6,7 @@ angular.module('starter.controllers', [])
     BaasBoxService.login($scope.data.username, $scope.data.password)
       .then(function (body) {
         token = body.data.data["X-BB-SESSION"];
+        // Save token for further calls that require authentication
         BaasBoxService.setToken(token)
         BaasBoxService.getTasks()
           .then(function (body) {
@@ -37,6 +38,7 @@ angular.module('starter.controllers', [])
   }
 })
 
+// Controller for task list view
 .controller('TaskCtrl', ['$scope', '$ionicPopup', 'Tasks', 'BaasBoxService', function ($scope, $ionicPopup, Tasks, BaasBoxService) {
   $scope.tasks = Tasks.get()
 
@@ -52,7 +54,9 @@ angular.module('starter.controllers', [])
   }
 }])
 
+// Controller for task detail view
 .controller('TaskDetailCtrl', ['$ionicPopup', '$scope', '$stateParams', 'BaasBoxService', 'Tasks', function ($ionicPopup, $scope, $stateParams, BaasBoxService,Tasks) {
+  // parameter name 'taskName' must match the parameter defined in the state url
   $scope.task = Tasks.getTask($stateParams.taskName)
 
   $scope.toggle = function (task) {
