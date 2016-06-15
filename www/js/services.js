@@ -19,6 +19,12 @@ angular.module('starter.services', [])
     return $http.post(baseUrl + "/logout", {}, {headers: {"X-BB-SESSION": token, "X-BAASBOX-APPCODE": appcode}})
   }
 
+  // Update task status
+  this.toggleTask = function (task) {
+    var id = task.id
+    return $http.put(baseUrl + "/document/tasks/" + id + "/.enabled", {"data": task.enabled}, {headers: {"X-BB-SESSION": token, "Content-type": "application/json" }})
+  }
+
   // Set token
   this.setToken = function (newToken) {
     token = newToken

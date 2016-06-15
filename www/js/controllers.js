@@ -52,6 +52,19 @@ angular.module('starter.controllers', [])
   }
 }])
 
-.controller('TaskDetailCtrl', ['$scope', '$stateParams', 'Tasks', function ($scope, $stateParams, Tasks) {
+.controller('TaskDetailCtrl', ['$ionicPopup', '$scope', '$stateParams', 'BaasBoxService', 'Tasks', function ($ionicPopup, $scope, $stateParams, BaasBoxService,Tasks) {
   $scope.task = Tasks.getTask($stateParams.taskName)
+
+  $scope.toggle = function (task) {
+    BaasBoxService.toggleTask(task)
+      .then(function (body) {
+        $ionicPopup.alert({
+          title: body.data.result
+        })
+      }, function (error) {
+        $ionicPopup.alert({
+          title: error
+        })
+      })
+  }
 }])
