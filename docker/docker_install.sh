@@ -9,7 +9,7 @@ sudo echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" >> /etc/ap
 
 # Install Docker Engine
 sudo apt-get update
-sudo apt-get install docker-engine
+sudo apt-get install -y docker-engine
 sudo service docker start
 
 # Verify installation

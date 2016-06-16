@@ -16,4 +16,4 @@ EXPOSE 9000
 CMD ["./start"]
 
 # Docker 'run' command
-# docker run -di -p 9000:9000 --name=baasbox baasbox
+# docker run -d -p 9000:9000 --name=baasbox baasbox
