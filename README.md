@@ -1,11 +1,11 @@
 # Instapp
 
-Mobile application for installing new metering units. App has been developed with Ionic framework and backend uses BaasBox. More detailed information can be found in the wiki.
+Mobile application for installing new metering units. App has been developed with Ionic framework and backend uses BaasBox. More detailed information can be found in the [wiki](https://github.com/IoTitude/Instapp/wiki).
 
 ## Tools
 
-Ionic 1.7.14
-BaasBox 0.9.5
+[Ionic](http://ionicframework.com/) 1.7.14
+[BaasBox](http://www.baasbox.com/) 0.9.5
 
 ## Release Plan
 
@@ -28,10 +28,8 @@ BaasBox 0.9.5
 
 | Status | Step | Status |
 |:----|:----|:----|
-| Accepted/ Denied | User can read the QR of a metering unit in order to find the related open task | - |
-| Accepted/ Denied | Kaa integration | - |
-| Accepted/ Denied | Application uses tokens that expire | - |
-| Accepted/ Denied | Automatically get fresh tokens if logged in | - |
+| Accepted/ Denied | Instapp uses an external configuration file | - |
+| Accepted/ Denied | Add proper error handling for when Instapp can't reach the BaasBox server | - |
 
 ### Misc Features
 
@@ -44,3 +42,5 @@ BaasBox 0.9.5
 - Installer needs to input installation information on activation
 - Proper error handling
 - BaasBox communicates with SDN controller
+- BaasBox communicates with KAAadmin and KaMU
+- User can read the QR of a metering unit in order to find the related open task
