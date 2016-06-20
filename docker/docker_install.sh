@@ -14,3 +14,10 @@ sudo service docker start
 
 # Verify installation
 sudo docker run hello-world
+
+# Install Docker Compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+# Verify installation
+sudo docker-compose --version
