@@ -1,10 +1,21 @@
 angular.module('starter.services', [])
 
+/* Server configuration
+ *
+ * It was considered to have this information in a separate file but it might be
+ * better to have it in the same module as the BaasBoxService. That way they
+ * are more connected and can be treated as one module. This information might be
+ * best hidden from GitHub but at this point in development it doesn't matter much.
+ */
+.constant('SERVER_CONFIG', {
+  'BASE_URL': 'http://192.168.142.37:9000',
+  'APPCODE': '1234567890'
+})
+
 // Service for communicating with the BaasBox API
-.service('BaasBoxService', function($http) {
-  // TODO: Move server information to a configuration file. DO NOT publish that file on GitHub.
-  var baseUrl = "http://192.168.142.37:9000";
-  var appcode = "1234567890";
+.service('BaasBoxService', function($http, SERVER_CONFIG) {
+  var baseUrl = SERVER_CONFIG.BASE_URL;
+  var appcode = SERVER_CONFIG.APPCODE;
   var token = "";
 
   this.login = function(username, password) {
