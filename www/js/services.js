@@ -35,7 +35,12 @@ angular.module('starter.services', [])
   // Update task status
   this.toggleTask = function (task) {
     var id = task.id
-    return $http.put(baseUrl + "/document/tasks/" + id + "/.enabled", {"data": task.enabled}, {headers: {"X-BB-SESSION": token, "Content-type": "application/json" }})
+    return $http.put(baseUrl + "/document/tasks/" + id + "/.enabled",
+      {"data": task.enabled},
+      {headers: {
+        "X-BB-SESSION": token,
+        "Content-type": "application/json"
+      }})
   }
 
   // Set token
