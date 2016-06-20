@@ -18,9 +18,15 @@ angular.module('starter.controllers', [])
           })
         $state.go('tab.tasks')
       }, function(error) {
-        $ionicPopup.alert({
-          title: error.data.message
-        })
+        if (error.status === -1) {
+          $ionicPopup.alert({
+            title: "Could not connect to server"
+          })
+        } else {
+          $ionicPopup.alert({
+            title: error.data.message
+          })
+        }
       })
   }
 })
