@@ -44,3 +44,4 @@ Mobile application for installing new metering units. App has been developed wit
 - BaasBox communicates with SDN controller
 - BaasBox communicates with KAAadmin and KaMU
 - User can read the QR of a metering unit in order to find the related open task
+- Look and feel to match common design principles
