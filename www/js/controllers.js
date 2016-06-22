@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService, Tasks) {
+.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService, Tasks, ErrorService) {
   $scope.data = {}
   $scope.login = function() {
     BaasBoxService.login($scope.data.username, $scope.data.password)
