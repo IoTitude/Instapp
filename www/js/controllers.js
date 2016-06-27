@@ -12,40 +12,28 @@ angular.module('starter.controllers', [])
           .then(function (body) {
             Tasks.set(body.data.data)
           }, function (error) {
-            $ionicPopup.alert({
-              title: error.data.message
-            })
+            ErrorService.handleError(error)
           })
         $state.go('tab.tasks')
       }, function(error) {
-        if (error.status === -1) {
-          $ionicPopup.alert({
-            title: "Could not connect to server"
-          })
-        } else {
-          $ionicPopup.alert({
-            title: error.data.message
-          })
-        }
+        ErrorService.handleError(error)
       })
   }
 })
 
-.controller('LogoutCtrl', function ($scope, $state, $ionicPopup, BaasBoxService) {
+.controller('LogoutCtrl', function ($scope, $state, $ionicPopup, BaasBoxService, ErrorService) {
   $scope.logout = function () {
     BaasBoxService.logout()
       .then(function (body) {
         $state.go('login')
       }, function (error) {
-        $ionicPopup.alert({
-          title: error.data.message
-        })
+        ErrorService.handleError(error)
       })
   }
 })
 
 // Controller for task list view
-.controller('TaskCtrl', ['$scope', '$ionicPopup', 'Tasks', 'BaasBoxService', function ($scope, $ionicPopup, Tasks, BaasBoxService) {
+.controller('TaskCtrl', ['$scope', '$ionicPopup', 'Tasks', 'BaasBoxService', 'ErrorService', function ($scope, $ionicPopup, Tasks, BaasBoxService, ErrorService) {
   $scope.tasks = Tasks.get()
 
   $scope.update = function () {
@@ -53,15 +41,13 @@ angular.module('starter.controllers', [])
       .then(function (body) {
         $scope.tasks = body.data.data
       }, function (error) {
-        $ionicPopup.alert({
-          title: error.data.message
-        })
+        ErrorService.handleError(error)
       })
   }
 }])
 
 // Controller for task detail view
-.controller('TaskDetailCtrl', ['$ionicPopup', '$scope', '$stateParams', 'BaasBoxService', 'Tasks', function ($ionicPopup, $scope, $stateParams, BaasBoxService,Tasks) {
+.controller('TaskDetailCtrl', ['$ionicPopup', '$scope', '$stateParams', 'BaasBoxService', 'Tasks', 'ErrorService', function ($ionicPopup, $scope, $stateParams, BaasBoxService,Tasks, ErrorService) {
   // parameter name 'taskName' must match the parameter defined in the state url
   $scope.task = Tasks.getTask($stateParams.taskName)
 
@@ -72,9 +58,7 @@ angular.module('starter.controllers', [])
           title: body.data.result
         })
       }, function (error) {
-        $ionicPopup.alert({
-          title: error
-        })
+        ErrorService.handleError(error)
       })
   }
 }])
