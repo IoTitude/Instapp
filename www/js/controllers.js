@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService, Tasks, ErrorService) {
+.controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService, TasksService, ErrorService) {
   $scope.data = {}
   $scope.login = function() {
     BaasBoxService.login($scope.data.username, $scope.data.password)
@@ -10,7 +10,7 @@ angular.module('starter.controllers', [])
         BaasBoxService.setToken(token)
         BaasBoxService.getTasks()
           .then(function (body) {
-            Tasks.set(body.data.data)
+            TasksService.set(body.data.data)
           }, function (error) {
             ErrorService.handleError(error)
           })
@@ -31,7 +31,7 @@ angular.module('starter.controllers', [])
       })
   }
 })
-
+/*
 // Controller for task list view
 .controller('TaskCtrl', ['$scope', '$ionicPopup', 'Tasks', 'BaasBoxService', 'ErrorService', function ($scope, $ionicPopup, Tasks, BaasBoxService, ErrorService) {
   $scope.tasks = Tasks.get()
@@ -45,8 +45,9 @@ angular.module('starter.controllers', [])
       })
   }
 }])
-
+*/
 // Controller for task detail view
+/*
 .controller('TaskDetailCtrl', ['$ionicPopup', '$scope', '$stateParams', 'BaasBoxService', 'Tasks', 'ErrorService', function ($ionicPopup, $scope, $stateParams, BaasBoxService,Tasks, ErrorService) {
   // parameter name 'taskName' must match the parameter defined in the state url
   $scope.task = Tasks.getTask($stateParams.taskName)
@@ -62,3 +63,4 @@ angular.module('starter.controllers', [])
       })
   }
 }])
+*/

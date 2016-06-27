@@ -9,7 +9,8 @@ angular
   .module('starter', [
     'ionic',
     'starter.controllers',
-    'starter.services',
+    'instapp.detailController',
+    'instapp.tasksController',
     'instapp.baasBoxService',
     'instapp.errorService'])
 
@@ -51,7 +52,7 @@ angular
     views: {
       'tab-tasks': {
         templateUrl: 'templates/tab-tasks.html',
-        controller: 'TaskCtrl'
+        controller: 'TasksController'
       }
     }
   })
@@ -61,7 +62,7 @@ angular
     views: {
       'tab-tasks': {
         templateUrl: 'templates/task-detail.html',
-        controller: 'TaskDetailCtrl'
+        controller: 'DetailController'
       }
     }
   })
