@@ -2,7 +2,7 @@ angular
   .module('instapp.loginController', [])
   .controller('LoginController', LoginController)
 
-LoginController = [
+LoginController.$inject = [
   '$ionicPopup',
   '$scope',
   '$state',
