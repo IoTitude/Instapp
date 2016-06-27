@@ -7,11 +7,12 @@ angular.module('starter.services', [])
  * are more connected and can be treated as one module. This information might be
  * best hidden from GitHub but at this point in development it doesn't matter much.
  */
+ /*
 .constant('SERVER_CONFIG', {
   'BASE_URL': 'http://192.168.142.37:9000',
   'APPCODE': '1234567890'
 })
-
+/*
 // Service for communicating with the BaasBox API
 .service('BaasBoxService', function($http, SERVER_CONFIG) {
   var baseUrl = SERVER_CONFIG.BASE_URL;
@@ -49,7 +50,7 @@ angular.module('starter.services', [])
   }
 
 })
-
+*/
 // Service for storing the task list
 .factory('Tasks', [function () {
   var tasks = {}
