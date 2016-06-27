@@ -10,6 +10,7 @@ angular
     'ionic',
     'starter.controllers',
     'instapp.detailController',
+    'instapp.loginController',
     'instapp.tasksController',
     'instapp.baasBoxService',
     'instapp.errorService'])
@@ -89,7 +90,7 @@ angular
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
-    controller: 'LoginCtrl'
+    controller: 'LoginController'
   })
 
   // if none of the above states are matched, use this as the fallback

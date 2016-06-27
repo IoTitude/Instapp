@@ -1,5 +1,5 @@
 angular.module('starter.controllers', [])
-
+/*
 .controller('LoginCtrl', function ($scope, $ionicPopup, $state, BaasBoxService, TasksService, ErrorService) {
   $scope.data = {}
   $scope.login = function() {
@@ -20,7 +20,7 @@ angular.module('starter.controllers', [])
       })
   }
 })
-
+*/
 .controller('LogoutCtrl', function ($scope, $state, $ionicPopup, BaasBoxService, ErrorService) {
   $scope.logout = function () {
     BaasBoxService.logout()
