@@ -6,11 +6,11 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular
-  .module('starter', [
+  .module('instapp', [
     'ionic',
-    'starter.controllers',
     'instapp.detailController',
     'instapp.loginController',
+    'instapp.logoutController',
     'instapp.tasksController',
     'instapp.baasBoxService',
     'instapp.errorService'])
@@ -82,7 +82,7 @@ angular
     views: {
       'tab-logout': {
         templateUrl: 'templates/tab-logout.html',
-        controller: 'LogoutCtrl'
+        controller: 'LogoutController'
       }
     }
   })
