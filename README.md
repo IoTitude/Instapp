@@ -4,8 +4,8 @@ Mobile application for installing new metering units. App has been developed wit
 
 ## Tools
 
-[Ionic](http://ionicframework.com/) 1.7.14
-[BaasBox](http://www.baasbox.com/) 0.9.5
+- [Ionic](http://ionicframework.com/) 1.7.14
+- [BaasBox](http://www.baasbox.com/) 0.9.5
 
 ## Release Plan
 
@@ -35,7 +35,7 @@ Mobile application for installing new metering units. App has been developed wit
 
 | Status | Step | Status |
 |:----|:----|:----|
-| Accepted/ Denied | Refactor code into proper modules | - |
+| Accepted/ Denied | Refactor code into proper modules | Done |
 | Accepted/ Denied | Connect Instapp and BaasBox with the other sevices | - |
 
 ### Misc Features
