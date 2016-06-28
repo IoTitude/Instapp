@@ -12,28 +12,36 @@ angular
     var token = ""
 
     this.login = function(username, password) {
-      return $http.post(baseUrl + "/login", {"username": username, "password": password, "appcode": appcode})
+      var url = baseUrl + "/login"
+      return $http.post(url, {"username": username, "password": password, "appcode": appcode})
     }
 
     // Get all tasks from database
     this.getTasks = function() {
-      return $http.get(baseUrl + "/document/tasks", {headers: {"X-BB-SESSION": token}})
+      var url = baseUrl + "/document/Master"
+      return $http.get(url, {headers: {"X-BB-SESSION": token}})
     }
 
     // Logout
     this.logout = function () {
-      return $http.post(baseUrl + "/logout", {}, {headers: {"X-BB-SESSION": token, "X-BAASBOX-APPCODE": appcode}})
+      var url = baseUrl + "/logout"
+      return $http.post(url, {}, {headers: {"X-BB-SESSION": token, "X-BAASBOX-APPCODE": appcode}})
     }
 
     // Update task status
     this.toggleTask = function (task) {
       var id = task.id
-      return $http.put(baseUrl + "/document/tasks/" + id + "/.enabled",
-        {"data": task.enabled},
-        {headers: {
+      var url = baseUrl + "/document/Master/" + id + "/.enabled"
+      var body = {
+        "data": task.enabled
+      }
+      var headers = {
+        headers: {
           "X-BB-SESSION": token,
           "Content-type": "application/json"
-        }})
+        }
+      }
+      return $http.put(url, body, headers)
     }
 
     // Set token

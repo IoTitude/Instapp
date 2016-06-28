@@ -6,6 +6,6 @@
 angular
   .module('instapp.baasBoxService')
   .constant('SERVER_CONFIG', {
-    'BASE_URL': 'http://192.168.142.37:9000',
+    'BASE_URL': 'http://82.196.14.4:9000',
     'APPCODE': '1234567890'
   })
