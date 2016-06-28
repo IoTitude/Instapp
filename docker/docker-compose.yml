@@ -1,0 +1,8 @@
+baasbox-data:
+  image: iotitude/baasbox-data
+baasbox:
+  image: iotitude/baasbox
+  volumes_from:
+    - baasbox-data
+  ports:
+    - "9000:9000"
