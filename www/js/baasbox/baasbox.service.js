@@ -44,6 +44,18 @@ angular
       return $http.put(url, body, headers)
     }
 
+    this.toggleTaskSDN = function (task) {
+      var url = baseUrl + "/plugin/instapp.toggle"
+      var body = task
+      var headers = {
+        headers: {
+          "X-BB-SESSION": token,
+          "Content-type": "application/json"
+        }
+      }
+      return $http.put(url, body, headers)
+    }
+
     // Set token
     this.setToken = function (newToken) {
       token = newToken

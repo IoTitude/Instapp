@@ -1,0 +1,4 @@
+http().put(function (req) {
+  var doc = Box.Documents.save('Master', req.body})
+  return {status: 200, content: doc}
+})

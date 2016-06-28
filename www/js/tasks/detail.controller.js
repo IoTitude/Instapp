@@ -16,7 +16,7 @@ function DetailController ($ionicPopup, $scope, $stateParams,
     $scope.task = TasksService.getTask($stateParams.taskName)
 
     $scope.toggle = function (task) {
-      BaasBoxService.toggleTask(task)
+      BaasBoxService.toggleTaskSDN(task)
         .then(function (body) {
           $ionicPopup.alert({
             title: body.data.result
