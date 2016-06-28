@@ -7,4 +7,4 @@ plugins/
 
 
 # Exclude BaasBox config
-www/js/baasbox/baasbox.config.js
+baasbox.config.js
