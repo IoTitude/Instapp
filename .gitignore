@@ -4,3 +4,7 @@
 node_modules/
 platforms/
 plugins/
+
+
+# Exclude BaasBox config
+www/js/baasbox/baasbox.config.js
