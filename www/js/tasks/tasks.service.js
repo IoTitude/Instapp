@@ -14,7 +14,7 @@ function TasksService () {
     },
     getTask: function (id) {
       for (i = 0; i < tasks.length; i++) {
-        if (tasks[i].name === id) {
+        if (tasks[i].mac === id) {
           return tasks[i]
         }
       }

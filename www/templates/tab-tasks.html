@@ -1,11 +1,12 @@
 <ion-view view-title="Tasks">
   <ion-content class="padding">
-    <button ng-click="update()" class="button button-block button-positive">
-      Get tasks
-    </button>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="update()">
+    </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="task in tasks" href="#/tab/tasks/{{task.name}}">
-        {{task.name}}
+      <ion-item ng-repeat="task in tasks" href="#/tab/tasks/{{task.mac}}">
+        {{task.mac}}<br>
         {{task.enabled}}
       </ion-item>
     </ion-list>

@@ -19,5 +19,9 @@ function TasksController ($scope, $ionicPopup, BaasBoxService, ErrorService, Tas
       }, function (error) {
         ErrorService.handleError(error)
       })
+      .finally(function () {
+        // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete')
+      })
   }
 }
