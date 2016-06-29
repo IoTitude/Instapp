@@ -1,6 +1,40 @@
 http().put(function (req) {
   try {
-    var doc = Box.Documents.save('Master', req.body)
+    var body = req.body
+
+    var id = body.id
+    var mac = body.mac
+    var hash = body.hash
+    var installer = body.installer
+    var installationDate = body.installationDate
+    var address = body.address
+    var location = body.location
+    var sensorHeight = body.sensorHeight
+    var enabled = body.enabled
+    var status = body.status
+    var swVersion = body.swVersion
+    var sensors = body.sensors
+
+    var updateDoc = {
+      "id": id,
+      "mac": mac,
+      "hash": hash,
+      "installer": installer,
+      "installation-date": installationDate,
+      "address": address,
+      "location": location,
+      "sensor-height": sensorHeight,
+      "enabled": enabled,
+      "status": status,
+      "sw-version": swVersion,
+      "sensors": sensors
+    }
+
+    Box.log(updateDoc)
+
+    var doc = Box.Documents.save('Master', updateDoc)
+
+    // viesti sdn:lle
   } catch (error) {
     Box.log(error)
     return {status: 500, content: error}
