@@ -12,8 +12,10 @@ DetailController.$inject = [
 
 function DetailController ($ionicPopup, $scope, $stateParams,
   BaasBoxService, ErrorService, TasksService) {
-    // parameter name 'taskName' must match the parameter defined in the state url
-    $scope.task = TasksService.getTask($stateParams.taskName)
+    $scope.$on('$ionicView.beforeEnter', function () {
+      // parameter name 'taskName' must match the parameter defined in the state url
+      $scope.task = TasksService.getTask($stateParams.taskName)
+    })
 
     $scope.toggle = function (task) {
       BaasBoxService.toggleTaskSDN(task)

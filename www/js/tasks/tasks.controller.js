@@ -11,7 +11,7 @@ TasksController.$inject = [
 
 function TasksController ($scope, $ionicPopup, BaasBoxService, ErrorService, TasksService) {
   $scope.tasks = TasksService.get()
-  
+
   $scope.$on("$ionicView.beforeEnter", function(event, data){
      $scope.update()
   })
@@ -20,6 +20,7 @@ function TasksController ($scope, $ionicPopup, BaasBoxService, ErrorService, Tas
     BaasBoxService.getTasks()
       .then(function (body) {
         $scope.tasks = body.data.data
+        TasksService.set($scope.tasks)
       }, function (error) {
         ErrorService.handleError(error)
       })

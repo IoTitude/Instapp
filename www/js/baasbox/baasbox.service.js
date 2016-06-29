@@ -9,7 +9,19 @@ angular
   function BaasBoxService ($http, SERVER_CONFIG) {
     var baseUrl = SERVER_CONFIG.BASE_URL
     var appcode = SERVER_CONFIG.APPCODE
-    var token = ""
+
+    // Get all headers required by different calls.
+    //
+    // Headers that are not required by a call are just discarded by the
+    // BaasBox backend.
+    var getHeaders = function () {
+      return {
+        headers: {
+          "X-BB-SESSION": localStorage.getItem('BaasBoxToken'),
+          "X-BAASBOX-APPCODE": appcode,
+          "Content-type": "application/json"}
+      }
+    }
 
     this.login = function(username, password) {
       var url = baseUrl + "/login"
@@ -19,45 +31,34 @@ angular
     // Get all tasks from database
     this.getTasks = function() {
       var url = baseUrl + "/document/Master"
-      return $http.get(url, {headers: {"X-BB-SESSION": token}})
+      return $http.get(url, getHeaders())
     }
 
     // Logout
     this.logout = function () {
       var url = baseUrl + "/logout"
-      return $http.post(url, {}, {headers: {"X-BB-SESSION": token, "X-BAASBOX-APPCODE": appcode}})
+      return $http.post(url, {}, getHeaders())
     }
 
-    // Update task status
+    // Update task status through BaasBox REST API
     this.toggleTask = function (task) {
       var id = task.id
       var url = baseUrl + "/document/Master/" + id + "/.enabled"
       var body = {
         "data": task.enabled
       }
-      var headers = {
-        headers: {
-          "X-BB-SESSION": token,
-          "Content-type": "application/json"
-        }
-      }
-      return $http.put(url, body, headers)
+      return $http.put(url, body, getHeaders())
     }
 
+    // Update task status through BaasBox plugin
     this.toggleTaskSDN = function (task) {
       var url = baseUrl + "/plugin/instapp.toggle"
       var body = task
-      var headers = {
-        headers: {
-          "X-BB-SESSION": token,
-          "Content-type": "application/json"
-        }
-      }
-      return $http.put(url, body, headers)
+      return $http.put(url, body, getHeaders())
     }
 
     // Set token
     this.setToken = function (newToken) {
-      token = newToken
+      localStorage.setItem('BaasBoxToken', newToken)
     }
   }

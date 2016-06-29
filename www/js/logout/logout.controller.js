@@ -13,6 +13,7 @@ function LogoutController ($ionicPopup, $scope, $state, BaasBoxService, ErrorSer
   $scope.logout = function () {
     BaasBoxService.logout()
       .then(function (body) {
+        localStorage.removeItem('BaasBoxToken')
         $state.go('login')
       }, function (error) {
         ErrorService.handleError(error)
