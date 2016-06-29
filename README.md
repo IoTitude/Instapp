@@ -7,6 +7,15 @@ Mobile application for installing new metering units. App has been developed wit
 - [Ionic](http://ionicframework.com/) 1.7.14
 - [BaasBox](http://www.baasbox.com/) 0.9.5
 
+## Setup
+
+- Run `npm install` to install all required packages.
+- Run `ionic resources` to generate icons and splash screens for the platforms specified for the project. Only android is set for this project.
+- To build the app:
+  - Connect anroid phone to the computer.
+  - Enable USB debugging in the developer options.
+  - Run `ionic run android` to build and start the app on the phone.
+
 ## Release Plan
 
 ### Release Plan for v0.1
@@ -42,12 +51,10 @@ Mobile application for installing new metering units. App has been developed wit
 
 - BaasBox communicates with SDN controller
 - BaasBox communicates with KAAadmin and KaMU
-- Refactor code
 - Security considerations
   - tokens expire
   - token refresh
   - user groups and users
-- Save tokens to device
 - Implement more detailed data to metering units
 - Installer needs to input installation information on activation
 - User can read the QR of a metering unit in order to find the related open task
