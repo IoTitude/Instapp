@@ -11,6 +11,10 @@ TasksController.$inject = [
 
 function TasksController ($scope, $ionicPopup, BaasBoxService, ErrorService, TasksService) {
   $scope.tasks = TasksService.get()
+  
+  $scope.$on("$ionicView.beforeEnter", function(event, data){
+     $scope.update()
+  })
 
   $scope.update = function () {
     BaasBoxService.getTasks()
