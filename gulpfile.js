@@ -66,7 +66,8 @@ gulp.task('minjs', function (done) {
       './www/js/logout/logout.controller.js',
       './www/js/tasks/detail.controller.js',
       './www/js/tasks/tasks.controller.js',
-      './www/js/tasks/tasks.service.js'
+      './www/js/tasks/tasks.service.js',
+      './www/js/qr/qr.controller.js'
     ])
     .pipe(concat('app.bundle.js'))
     .pipe(gulp.dest('./www/js/'))

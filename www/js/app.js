@@ -6,10 +6,12 @@
 angular
   .module('instapp', [
     'ionic',
+    'ngCordova',
     'instapp.detailController',
     'instapp.loginController',
     'instapp.logoutController',
     'instapp.tasksController',
+    'instapp.qrController',
     'instapp.baasBoxService',
     'instapp.errorService'])
   .run(appRun)

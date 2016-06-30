@@ -37,7 +37,8 @@ function config ($stateProvider, $urlRouterProvider) {
         url: '/qr',
         views: {
           'tab-qr': {
-            templateUrl: 'templates/tab-qr.html'
+            templateUrl: 'templates/tab-qr.html',
+            controller: 'QRController'
           }
         }
     })
