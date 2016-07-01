@@ -1,3 +1,7 @@
+/*
+ * Configuration for the ErrorService.
+ */
+
 angular
   .module('instapp.errorService')
   .constant('errMsg', {

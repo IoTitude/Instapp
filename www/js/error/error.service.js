@@ -1,3 +1,10 @@
+/*
+ * Module for error handling.
+ *
+ * Other services pass their errors to this service in order to inform the user
+ * about what went wrong. By using this service the overall code is DRYer.
+ */
+
 angular
   .module('instapp.errorService', [])
   .service('ErrorService', ErrorService)
