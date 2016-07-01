@@ -1,14 +1,34 @@
+/*
+ * QR controller module
+ *
+ * This module handles the reading and processing of QR codes. It relies on
+ * ngCordova's Barcode Scanner plugin.
+ */
+
 angular
   .module('instapp.qrController', ['instapp.tasksService'])
   .controller('QRController', QRController)
 
-QRController.$inject = ['$scope', '$cordovaBarcodeScanner', 'TasksService', '$state', '$ionicPopup']
+QRController.$inject = [
+  '$cordovaBarcodeScanner',
+  '$ionicPopup'
+  '$scope',
+  '$state',
+  'TasksService']
 
-function QRController ($scope, $cordovaBarcodeScanner, TasksService, $state, $ionicPopup) {
+function QRController ($cordovaBarcodeScanner, $ionicPopup, $scope, $state, TasksService) {
+  // Enter QR scanner when user opens the QR tab
   $scope.$on("$ionicView.beforeEnter", function(event, data){
      $scope.scanBarcode()
   })
 
+  /*
+   * Mock implementation of the scanBarcode() function
+   *
+   * Ionic can't use cordova before building the native application. That is
+   * why this mock version is needed if a developer wants to simulate the behavior
+   * of the application in the browser.
+   */
   $scope.scanBarcodeMock = function () {
     var barcodeDataMock =
     {
