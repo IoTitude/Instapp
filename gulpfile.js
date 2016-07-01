@@ -71,10 +71,8 @@ gulp.task('minjs', function (done) {
     ])
     .pipe(concat('app.bundle.js'))
     .pipe(gulp.dest('./www/js/'))
-    // Uglifying the bundled app doesn't work with this configuration.
-    // Somehow the dependency injections break.
-    //.pipe(rename('app.bundle.min.js'))
-    //.pipe(uglify())
-    //.pipe(gulp.dest('./www/js/'))
+    .pipe(rename('app.bundle.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./www/js/'))
     .on('end', done);
 });

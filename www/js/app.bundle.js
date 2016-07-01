@@ -16,6 +16,8 @@ angular
     'instapp.errorService'])
   .run(appRun)
 
+appRun.$inject = ['$ionicPlatform']
+
 // Default Ionic run
 function appRun ($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -43,6 +45,8 @@ function appRun ($ionicPlatform) {
 angular
   .module('instapp')
   .config(config)
+
+config.$inject = ['$stateProvider', '$urlRouterProvider']
 
 function config ($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -191,7 +195,7 @@ angular
 angular
   .module('instapp.baasBoxService')
   .constant('SERVER_CONFIG', {
-    'BASE_URL': 'localhost:9000',
+    'BASE_URL': 'http://82.196.14.4:9000',
     'APPCODE': '1234567890'
   })
 
@@ -313,6 +317,12 @@ function LogoutController ($ionicPopup, $scope, $state, BaasBoxService, ErrorSer
   }
 }
 
+/*
+ * Task detail controller module
+ *
+ * Controlls the behavior of the task details view.
+ */
+
 angular
   .module('instapp.detailController', ['instapp.tasksService'])
   .controller('DetailController', DetailController)
@@ -327,11 +337,13 @@ DetailController.$inject = [
 
 function DetailController ($ionicPopup, $scope, $stateParams,
   BaasBoxService, ErrorService, TasksService) {
+    // Load task when entering the view
     $scope.$on('$ionicView.beforeEnter', function () {
       // parameter name 'taskName' must match the parameter defined in the state url
       $scope.task = TasksService.getTask($stateParams.taskName)
     })
 
+    // Switch task / metering unit enabled between true / false
     $scope.toggle = function (task) {
       BaasBoxService.toggleTaskSDN(task)
         .then(function (body) {
@@ -343,6 +355,12 @@ function DetailController ($ionicPopup, $scope, $stateParams,
         })
     }
 }
+
+/*
+ * Task controller module
+ *
+ * Controlls the behavior of the task list view.
+ */
 
 angular
   .module('instapp.tasksController', ['instapp.tasksService'])
@@ -358,10 +376,12 @@ TasksController.$inject = [
 function TasksController ($scope, $ionicPopup, BaasBoxService, ErrorService, TasksService) {
   $scope.tasks = TasksService.get()
 
+  // Get list of tasks on opening the tab
   $scope.$on("$ionicView.beforeEnter", function(event, data){
      $scope.update()
   })
 
+  // Update task list
   $scope.update = function () {
     BaasBoxService.getTasks()
       .then(function (body) {
@@ -377,6 +397,14 @@ function TasksController ($scope, $ionicPopup, BaasBoxService, ErrorService, Tas
   }
 }
 
+/*
+ * Tasks service module
+ *
+ * This is a helper service that is used for sharing a common list of
+ * tasks between different modules and their controllers. Angular services
+ * can store information while the app is running.
+ */
+
 angular
   .module('instapp.tasksService', [])
   .factory('TasksService', TasksService)
@@ -385,12 +413,15 @@ function TasksService () {
   var tasks = {}
 
   return {
+    // Set tasks list
     set: function (t) {
       tasks = t
     },
+    // Get tasks list
     get: function () {
       return tasks
     },
+    // Get a task from the tasks list. Mac address is used as a unique id.
     getTask: function (id) {
       for (i = 0; i < tasks.length; i++) {
         if (tasks[i].mac === id) {

@@ -16,6 +16,8 @@ angular
     'instapp.errorService'])
   .run(appRun)
 
+appRun.$inject = ['$ionicPlatform']
+
 // Default Ionic run
 function appRun ($ionicPlatform) {
   $ionicPlatform.ready(function() {

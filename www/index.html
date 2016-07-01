@@ -20,9 +20,10 @@
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
-    <script src="js/app.bundle.js"></script>
+    <script src="js/app.bundle.min.js"></script>
   </head>
-  <body ng-app="instapp">
+  <!-- ng-strict-di enforces explicit dependency injections. This ensures that uglifying doesn't break the code. -->
+  <body ng-app="instapp" ng-strict-di>
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
