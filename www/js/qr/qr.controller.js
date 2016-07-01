@@ -11,7 +11,7 @@ angular
 
 QRController.$inject = [
   '$cordovaBarcodeScanner',
-  '$ionicPopup'
+  '$ionicPopup',
   '$scope',
   '$state',
   'TasksService']

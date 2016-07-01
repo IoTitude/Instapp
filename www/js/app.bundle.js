@@ -16,6 +16,7 @@ angular
     'instapp.errorService'])
   .run(appRun)
 
+// Default Ionic run
 function appRun ($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -32,6 +33,13 @@ function appRun ($ionicPlatform) {
   });
 }
 
+/*
+ * Instapp routes configuration
+ *
+ * Configures different states the app can be in. These are used to manage
+ * the different views the user moves through.
+ */
+
 angular
   .module('instapp')
   .config(config)
@@ -47,6 +55,7 @@ function config ($stateProvider, $urlRouterProvider) {
 
   // Each tab has its own nav history stack:
 
+    // Tasklist view configuration
     .state('tab.tasks', {
       url: '/tasks',
       views: {
@@ -57,6 +66,7 @@ function config ($stateProvider, $urlRouterProvider) {
       }
     })
 
+    // Task detail view configuration
     .state('tab.task-detail', {
       url: '/tasks/:taskName',
       views: {
@@ -67,6 +77,7 @@ function config ($stateProvider, $urlRouterProvider) {
       }
     })
 
+    // QR reader view configuration
     .state('tab.qr', {
         url: '/qr',
         views: {
@@ -77,6 +88,7 @@ function config ($stateProvider, $urlRouterProvider) {
         }
     })
 
+    // Logout view configuration
     .state('tab.logout', {
       url: '/logout',
       views: {
@@ -87,6 +99,7 @@ function config ($stateProvider, $urlRouterProvider) {
       }
     })
 
+    // Login view configuration
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
@@ -97,7 +110,11 @@ function config ($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/login')
 }
 
-// Service for communicating with the BaasBox API
+/*
+ * Service for communicating with the BaasBox API
+ *
+ * Manages all the calls needed to the BaasBox REST API.
+ */
 
 angular
   .module('instapp.baasBoxService', [])
@@ -109,10 +126,11 @@ angular
     var baseUrl = SERVER_CONFIG.BASE_URL
     var appcode = SERVER_CONFIG.APPCODE
 
-    // Get all headers required by different calls.
-    //
-    // Headers that are not required by a call are just discarded by the
-    // BaasBox backend.
+    /* Get all headers required by different calls.
+     *
+     * Headers that are not required by a call are just discarded by the
+     * BaasBox backend.
+     */
     var getHeaders = function () {
       return {
         headers: {
@@ -122,6 +140,7 @@ angular
       }
     }
 
+    // Login request
     this.login = function(username, password) {
       var url = baseUrl + "/login"
       return $http.post(url, {"username": username, "password": password, "appcode": appcode})
@@ -133,13 +152,14 @@ angular
       return $http.get(url, getHeaders())
     }
 
-    // Logout
+    // Logout request
     this.logout = function () {
       var url = baseUrl + "/logout"
       return $http.post(url, {}, getHeaders())
     }
 
-    // Update task status through BaasBox REST API
+    // Update task status through BaasBox REST API.
+    // Final application uses toggleTaskSDN() instead
     this.toggleTask = function (task) {
       var id = task.id
       var url = baseUrl + "/document/Master/" + id + "/.enabled"
@@ -156,7 +176,8 @@ angular
       return $http.put(url, body, getHeaders())
     }
 
-    // Set token
+    // Set token to local storage. The token is required by all requests
+    // that need authentication.
     this.setToken = function (newToken) {
       localStorage.setItem('BaasBoxToken', newToken)
     }
@@ -164,15 +185,22 @@ angular
 
 /* Server configuration
  *
- * This information might be best hidden from GitHub but at this point in
- * development it doesn't matter much.
+ * This is a template of the configuration needed for connecting to the
+ * backend service provided by BaasBox. Change these to suit your needs.
  */
 angular
   .module('instapp.baasBoxService')
   .constant('SERVER_CONFIG', {
-    'BASE_URL': 'http://82.196.14.4:9000',
+    'BASE_URL': 'localhost:9000',
     'APPCODE': '1234567890'
   })
+
+/*
+ * Module for error handling.
+ *
+ * Other services pass their errors to this service in order to inform the user
+ * about what went wrong. By using this service the overall code is DRYer.
+ */
 
 angular
   .module('instapp.errorService', [])
@@ -209,6 +237,10 @@ function ErrorService (errMsg, $ionicPopup) {
   }
 }
 
+/*
+ * Configuration for the ErrorService.
+ */
+
 angular
   .module('instapp.errorService')
   .constant('errMsg', {
@@ -217,6 +249,12 @@ angular
     BAD_REQUEST: '400: Check your username and password.',
     UNAUTHORIZED: '401: Unathorized. Please sign in first.'
   })
+
+/*
+ * Login module.
+ *
+ * Handles the login process.
+ */
 
 angular
   .module('instapp.loginController', [])
@@ -232,10 +270,12 @@ LoginController.$inject = [
 
 function LoginController ($ionicPopup, $scope, $state, BaasBoxService, ErrorService, TasksService) {
   $scope.data = {}
+
   $scope.login = function() {
     BaasBoxService.login($scope.data.username, $scope.data.password)
       .then(function (body) {
-        token = body.data.data["X-BB-SESSION"];
+        // Get the token from the return message
+        token = body.data.data["X-BB-SESSION"]
         // Save token for further calls that require authentication
         BaasBoxService.setToken(token)
         $state.go('tab.tasks')
@@ -245,6 +285,11 @@ function LoginController ($ionicPopup, $scope, $state, BaasBoxService, ErrorServ
   }
 }
 
+/*
+ * Logout module
+ *
+ * Handles logout.
+ */
 angular
   .module('instapp.logoutController', [])
   .controller('LogoutController', LogoutController)
@@ -356,17 +401,37 @@ function TasksService () {
   }
 }
 
+/*
+ * QR controller module
+ *
+ * This module handles the reading and processing of QR codes. It relies on
+ * ngCordova's Barcode Scanner plugin.
+ */
+
 angular
   .module('instapp.qrController', ['instapp.tasksService'])
   .controller('QRController', QRController)
 
-QRController.$inject = ['$scope', '$cordovaBarcodeScanner', 'TasksService', '$state', '$ionicPopup']
+QRController.$inject = [
+  '$cordovaBarcodeScanner',
+  '$ionicPopup',
+  '$scope',
+  '$state',
+  'TasksService']
 
-function QRController ($scope, $cordovaBarcodeScanner, TasksService, $state, $ionicPopup) {
+function QRController ($cordovaBarcodeScanner, $ionicPopup, $scope, $state, TasksService) {
+  // Enter QR scanner when user opens the QR tab
   $scope.$on("$ionicView.beforeEnter", function(event, data){
      $scope.scanBarcode()
   })
 
+  /*
+   * Mock implementation of the scanBarcode() function
+   *
+   * Ionic can't use cordova before building the native application. That is
+   * why this mock version is needed if a developer wants to simulate the behavior
+   * of the application in the browser.
+   */
   $scope.scanBarcodeMock = function () {
     var barcodeDataMock =
     {
