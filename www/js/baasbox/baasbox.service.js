@@ -1,4 +1,8 @@
-// Service for communicating with the BaasBox API
+/*
+ * Service for communicating with the BaasBox API
+ *
+ * Manages all the calls needed to the BaasBox REST API.
+ */
 
 angular
   .module('instapp.baasBoxService', [])
@@ -10,10 +14,11 @@ angular
     var baseUrl = SERVER_CONFIG.BASE_URL
     var appcode = SERVER_CONFIG.APPCODE
 
-    // Get all headers required by different calls.
-    //
-    // Headers that are not required by a call are just discarded by the
-    // BaasBox backend.
+    /* Get all headers required by different calls.
+     *
+     * Headers that are not required by a call are just discarded by the
+     * BaasBox backend.
+     */
     var getHeaders = function () {
       return {
         headers: {
@@ -23,6 +28,7 @@ angular
       }
     }
 
+    // Login request
     this.login = function(username, password) {
       var url = baseUrl + "/login"
       return $http.post(url, {"username": username, "password": password, "appcode": appcode})
@@ -34,13 +40,14 @@ angular
       return $http.get(url, getHeaders())
     }
 
-    // Logout
+    // Logout request
     this.logout = function () {
       var url = baseUrl + "/logout"
       return $http.post(url, {}, getHeaders())
     }
 
-    // Update task status through BaasBox REST API
+    // Update task status through BaasBox REST API.
+    // Final application uses toggleTaskSDN() instead
     this.toggleTask = function (task) {
       var id = task.id
       var url = baseUrl + "/document/Master/" + id + "/.enabled"
@@ -57,7 +64,8 @@ angular
       return $http.put(url, body, getHeaders())
     }
 
-    // Set token
+    // Set token to local storage. The token is required by all requests
+    // that need authentication.
     this.setToken = function (newToken) {
       localStorage.setItem('BaasBoxToken', newToken)
     }
