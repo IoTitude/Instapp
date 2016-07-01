@@ -16,6 +16,7 @@ angular
     'instapp.errorService'])
   .run(appRun)
 
+// Default Ionic run
 function appRun ($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
