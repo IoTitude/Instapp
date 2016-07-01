@@ -1,3 +1,10 @@
+/*
+ * Instapp routes configuration
+ *
+ * Configures different states the app can be in. These are used to manage
+ * the different views the user moves through.
+ */
+
 angular
   .module('instapp')
   .config(config)
@@ -13,6 +20,7 @@ function config ($stateProvider, $urlRouterProvider) {
 
   // Each tab has its own nav history stack:
 
+    // Tasklist view configuration
     .state('tab.tasks', {
       url: '/tasks',
       views: {
@@ -23,6 +31,7 @@ function config ($stateProvider, $urlRouterProvider) {
       }
     })
 
+    // Task detail view configuration
     .state('tab.task-detail', {
       url: '/tasks/:taskName',
       views: {
@@ -33,6 +42,7 @@ function config ($stateProvider, $urlRouterProvider) {
       }
     })
 
+    // QR reader view configuration
     .state('tab.qr', {
         url: '/qr',
         views: {
@@ -43,6 +53,7 @@ function config ($stateProvider, $urlRouterProvider) {
         }
     })
 
+    // Logout view configuration
     .state('tab.logout', {
       url: '/logout',
       views: {
@@ -53,6 +64,7 @@ function config ($stateProvider, $urlRouterProvider) {
       }
     })
 
+    // Login view configuration
     .state('login', {
       url: '/login',
       templateUrl: 'templates/login.html',
