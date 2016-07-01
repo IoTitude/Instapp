@@ -1,3 +1,8 @@
+/*
+ * Logout module
+ *
+ * Handles logout.
+ */
 angular
   .module('instapp.logoutController', [])
   .controller('LogoutController', LogoutController)
