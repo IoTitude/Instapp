@@ -4,5 +4,7 @@ baasbox:
   image: iotitude/baasbox
   volumes_from:
     - baasbox-data
+  labels:
+    io.rancher.sidekicks: baasbox-data
   ports:
     - "9000:9000"
