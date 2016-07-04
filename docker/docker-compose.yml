@@ -1,5 +1,7 @@
 baasbox-data:
   image: iotitude/baasbox-data
+  labels:
+    io.rancher.container.start_once: 'true'
 baasbox:
   image: iotitude/baasbox
   volumes_from:
