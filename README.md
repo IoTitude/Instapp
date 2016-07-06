@@ -7,11 +7,6 @@ Instapp is a mobile application for installing new metering units. App has been 
 1. [Tools](#tools)   
 2. [Setup](#setup)   
 3. [Release Plan](#release-plan)   
-3.1. [Release Plan for v0.1](#release-plan-for-v01)   
-3.2. [Release Plan for v0.2](#release-plan-for-v02)   
-3.3. [Release Plan for v0.3](#release-plan-for-v03)   
-3.4. [Release Plan for v0.4](#release-plan-for-v04)   
-3.5. [Misc Features](#misc-features)   
 
 <!-- /MDTOC -->
 
