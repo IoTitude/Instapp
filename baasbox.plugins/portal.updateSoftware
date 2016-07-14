@@ -1,0 +1,14 @@
+/*
+ * Plugin for updating the software version of a KaMU
+ */
+
+var lib = require('library.shared')
+
+http().put(function (req) {
+  // TODO: Make a call to the Java REST API that sets the software version on
+  // the KaMU.
+
+  // Update the information in the database
+  var body = req.body
+  lib.update(body)
+})
