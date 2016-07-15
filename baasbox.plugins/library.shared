@@ -4,6 +4,9 @@
  * Provides shared functions for other plugins.
  */
 
+// Url to the java rest api
+var JAVA_REST_URL = "http://192.168.142.30:8080/HelloWorldApplication/webresources/helloworld"
+
 // Update the KaMU's data in the database
 var update = function (kamu) {
   var id = Box.Documents.find("Master", {fields: "id", where:"mac = '" + kamu.mac + "'"})[0].id
@@ -49,4 +52,5 @@ var update = function (kamu) {
   return doc
 }
 
+exports.JAVA_REST_URL = JAVA_REST_URL
 exports.update = update

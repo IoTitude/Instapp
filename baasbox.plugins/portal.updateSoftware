@@ -5,10 +5,27 @@
 var lib = require('library.shared')
 
 http().put(function (req) {
-  // TODO: Make a call to the Java REST API that sets the software version on
-  // the KaMU.
+  // TODO: Check that user has the required rights!
+  try {
+    // TODO: Parse the rigth kind of data.
+    var data_to_send = "&key=1&value=jsdakfhlksda&"
+    var result_REST = Box.WS.post(
+      lib.JAVA_REST_URL,
+      data_to_send,
+      {
+        params: {},
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      }
+    )
+    // Update the information in the database
+    var body = req.body
+    var result = lib.update(body)
+  } catch (error) {
+    Box.log(error)
+    return {status: 500}
+  }
 
-  // Update the information in the database
-  var body = req.body
-  lib.update(body)
+  return {status: 200, content: result_REST}
 })
