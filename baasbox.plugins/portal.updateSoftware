@@ -5,12 +5,23 @@
 var lib = require('library.shared')
 
 http().put(function (req) {
-  // TODO: Check that user has the required rights!
+  // Check that user has the required rights
+  if (!Box.isAdmin()) {
+    return {status: 401}
+  }
+
   try {
-    // TODO: Parse the rigth kind of data.
-    var data_to_send = "&key=1&value=jsdakfhlksda&"
+    var body = req.body
+    var datetime = body.datetime
+    var kamu = body.kamu
+    var versionTag = kamu.swVersion
+
+    var hash = Box.Documents.find("Master", { fields: "hash", where: "mac = " + kamu.mac})[0].hash
+
+    var data_to_send = "&datetime=" + datetime + "&versionTag=" + versionTag + "&hash=" + hash + "&"
+    Box.log(data_to_send)
     var result_REST = Box.WS.post(
-      lib.JAVA_REST_URL,
+      lib.JAVA_REST_URL + "/updateDevice",
       data_to_send,
       {
         params: {},
@@ -19,13 +30,16 @@ http().put(function (req) {
         }
       }
     )
+    Box.log(result_REST)
+
     // Update the information in the database
-    var body = req.body
-    var result = lib.update(body)
+    if (result_REST.status === 200) {
+      var result = lib.update(kamu)
+    }
   } catch (error) {
     Box.log(error)
     return {status: 500}
   }
 
-  return {status: 200, content: result_REST}
+  return {status: 200, content: result}
 })
