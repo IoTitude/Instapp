@@ -15,13 +15,13 @@ http().put(function (req) {
     var datetime = body.datetime
     var kamu = body.kamu
     var profile = kamu.activeProfile
+    var hash = kamu.hash
 
-    var hash = Box.Documents.find("Master", { fields: "hash", where: "mac = " + kamu.mac})[0].hash
-    var profileId = Box.Documents.find("Profile", { fields: "id", where: "name = " + profile})[0].id
-
+    var profileId = Box.Documents.find("Profile", { fields: "profileId", where: "name = '" + profile + "'"})[0].profileId
+    Box.log(profileId)
     var data_to_send = "&datetime=" + datetime + "&profileId=" + profileId + "&hash=" + hash + "&"
     Box.log(data_to_send)
-    var result_REST = Box.WS.put(
+    var result_REST = Box.WS.post(
       lib.JAVA_REST_URL + "/changeProfile",
       data_to_send,
       {
@@ -36,6 +36,8 @@ http().put(function (req) {
     // Update the information in the database
     if (result_REST.status === 200) {
       var result = lib.update(kamu)
+    } else {
+      throw result_REST
     }
   } catch (error) {
     Box.log(error)

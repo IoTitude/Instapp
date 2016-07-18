@@ -14,13 +14,14 @@ http().put(function (req) {
     var body = req.body
     var datetime = body.datetime
     var kamu = body.kamu
+    Box.log(kamu)
     var versionTag = kamu.swVersion
+    var hash = kamu.hash
 
-    var hash = Box.Documents.find("Master", { fields: "hash", where: "mac = " + kamu.mac})[0].hash
-
+    Box.log(hash)
     var data_to_send = "&datetime=" + datetime + "&versionTag=" + versionTag + "&hash=" + hash + "&"
     Box.log(data_to_send)
-    var result_REST = Box.WS.put(
+    var result_REST = Box.WS.post(
       lib.JAVA_REST_URL + "/updateDevice",
       data_to_send,
       {
@@ -35,6 +36,8 @@ http().put(function (req) {
     // Update the information in the database
     if (result_REST.status === 200) {
       var result = lib.update(kamu)
+    } else {
+      throw result_REST
     }
   } catch (error) {
     Box.log(error)

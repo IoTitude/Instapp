@@ -5,7 +5,7 @@
  */
 
 // Url to the java rest api
-var JAVA_REST_URL = "http://192.168.142.30:8080/HelloWorldApplication/webresources/helloworld"
+var JAVA_REST_URL = "http://192.168.142.30:8080/adminkamu/webresources/controller"
 
 // Update the KaMU's data in the database
 var update = function (kamu) {
@@ -43,7 +43,7 @@ var update = function (kamu) {
     "status": status,
     "swVersion": swVersion,
     "sensors": sensors,
-    "activeProfiles": activeProfiles
+    "activeProfile": activeProfile
   }
 
   // Same as for creating new document. Id field makes this an update.

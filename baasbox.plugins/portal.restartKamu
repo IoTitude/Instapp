@@ -14,12 +14,11 @@ http().put(function (req) {
     var body = req.body
     var datetime = body.datetime
     var kamu = body.kamu
-
-    var hash = Box.Documents.find("Master", { fields: "hash", where: "mac = " + kamu.mac})[0].hash
+    var hash = kamu.hash
 
     var data_to_send = "&datetime=" + datetime + "&hash=" + hash + "&"
     Box.log(data_to_send)
-    var result_REST = Box.WS.put(
+    var result_REST = Box.WS.post(
       lib.JAVA_REST_URL + "/restartDevice",
       data_to_send,
       {
@@ -30,6 +29,10 @@ http().put(function (req) {
       }
     )
     Box.log(result_REST)
+
+    if (result_REST.status !== 200) {
+      throw result_REST
+    }
 
   } catch (error) {
     Box.log(error)
