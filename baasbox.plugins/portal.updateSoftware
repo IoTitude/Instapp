@@ -21,6 +21,7 @@ http().put(function (req) {
     Box.log(hash)
     var data_to_send = "&datetime=" + datetime + "&versionTag=" + versionTag + "&hash=" + hash + "&"
     Box.log(data_to_send)
+
     var result_REST = Box.WS.post(
       lib.JAVA_REST_URL + "/updateDevice",
       data_to_send,
@@ -37,11 +38,13 @@ http().put(function (req) {
     if (result_REST.status === 200) {
       var result = lib.update(kamu)
     } else {
-      throw result_REST
+      return { status: result_REST.status, content: result_REST }
     }
+
+
   } catch (error) {
     Box.log(error)
-    return {status: 500}
+    return {status: 500, content: error}
   }
 
   return {status: 200, content: result}

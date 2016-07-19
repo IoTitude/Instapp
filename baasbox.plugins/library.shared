@@ -26,7 +26,7 @@ var update = function (kamu) {
   var status = kamu.status
   var swVersion = kamu.swVersion
   var sensors = kamu.sensors
-  var activeProfiles = kamu.activeProfiles
+  var activeProfile = kamu.activeProfile
 
   // When updating via plugin the document content needs to be the same as
   // on creation. The additional id field indicates that this is an update.

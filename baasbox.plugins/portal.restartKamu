@@ -18,6 +18,7 @@ http().put(function (req) {
 
     var data_to_send = "&datetime=" + datetime + "&hash=" + hash + "&"
     Box.log(data_to_send)
+    
     var result_REST = Box.WS.post(
       lib.JAVA_REST_URL + "/restartDevice",
       data_to_send,
@@ -28,15 +29,12 @@ http().put(function (req) {
         }
       }
     )
-    Box.log(result_REST)
 
-    if (result_REST.status !== 200) {
-      throw result_REST
-    }
+    Box.log(result_REST)
 
   } catch (error) {
     Box.log(error)
-    return {status: 500}
+    return {status: 500, content: error}
   }
 
   return {status: 200, content: result}
