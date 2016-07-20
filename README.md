@@ -17,8 +17,10 @@ Instapp is a mobile application for installing new metering units. App has been 
 
 ## Setup
 
-- Run `npm install` to install all required packages.
-- Run `ionic resources` to generate icons and splash screens for the platforms specified for the project. Only android is set for this project.
+- Install Ionic Framework
+- Run `setup.sh`
+- Configute BaasBox server in `baasbox.config.js`
+- Run `gulp minjs` in order to generate new `app.bundle.min.js`
 - To build the app:
   - Connect anroid phone to the computer.
   - Enable USB debugging in the developer options.
