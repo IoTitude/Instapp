@@ -13,7 +13,6 @@ Instapp is a mobile application for installing new metering units. App has been 
 ## Tools
 
 - [Ionic](http://ionicframework.com/) 1.7.14
-- [BaasBox](http://www.baasbox.com/) 0.9.5
 
 ## Setup
 
