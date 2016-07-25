@@ -1,3 +1,5 @@
+# Image for running the Instapp in a container.
+
 FROM ubuntu:14.04
 MAINTAINER Ruben Laube-Pohto
 
